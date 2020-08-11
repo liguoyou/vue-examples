@@ -1,6 +1,6 @@
 <template>
-  <svg :class="svgClass" aria-hidden="true" v-on="$listeners">
-    <use :xlink:href="iconName" />
+  <svg class="svg-icon" aria-hidden="true" v-on="$listeners" v-bind="$attrs">
+    <use :xlink:href="iconId" />
   </svg>
 </template>
 <script>
@@ -11,21 +11,10 @@ export default {
       type: String,
       required: true,
     },
-    className: {
-      type: String,
-      default: "",
-    },
   },
   computed: {
-    iconName() {
+    iconId() {
       return `#icon-${this.id}`;
-    },
-    svgClass() {
-      if (this.className) {
-        return "svg-icon " + this.className;
-      } else {
-        return "svg-icon";
-      }
     },
   },
 };
@@ -37,5 +26,6 @@ export default {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+  font-size: 28px;
 }
 </style>
