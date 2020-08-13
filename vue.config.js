@@ -6,11 +6,13 @@ module.exports = {
     port: 8888, // 自定义端口号
   },
 
+  // webpack-merge
   configureWebpack: {
     // 项目名称
     name: "VUE 项目最佳实例",
   },
 
+  // webpack-chain
   chainWebpack(config) {
     // 配置 svg 规则排除 icons 目录
     config.module
