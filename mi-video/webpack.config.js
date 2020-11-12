@@ -17,17 +17,33 @@ module.exports = {
     },
     module: {
         rules: [
+            // 全局的css解析
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
+                exclude: [
+                    path.resolve(__dirname, 'src/components'),
+                ],
+            },
+            // 组件模块的css解析
+            {
+                test: /\.css$/,
+                use: ['style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        // modules: true,
+                        modules: {
+                            localIdentHashPrefix: 'my-custom-hash'
+                        },
+                    },
+                }],
+                include: [
+                    path.resolve(__dirname, 'src/components'),
+                ],
             },
             {
                 test: /\.(eot|woff|woff2|ttf|svg)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
+                use: ['file-loader'],
             },
             {
                 test: /\.ts$/,

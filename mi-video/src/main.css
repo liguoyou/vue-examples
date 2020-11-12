@@ -69,3 +69,6 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.popup {
+    background-color: green;
+}
