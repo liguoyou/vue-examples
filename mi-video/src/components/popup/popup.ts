@@ -1,5 +1,4 @@
-const popupStyle = require('./popup.css').default;
-
+import popupStyle from './popup.css';
 interface Ipopup {
     title: string;
     width?: string;
@@ -24,8 +23,8 @@ class Popup implements Icomponent {
     tempContainer;
     constructor(private settings: Ipopup) {
         this.settings = Object.assign({
-            width: '600px',
-            height: '500px',
+            width: '880px',
+            height: '556px',
             pos: 'center',
             mask: true,
             content: () => {}
@@ -41,12 +40,24 @@ class Popup implements Icomponent {
     // 创建模板
     template() {
         this.tempContainer = document.createElement('div');
-        console.log('popupStyle', popupStyle)
-        this.tempContainer.className = popupStyle.popup;
+        this.tempContainer.className = popupStyle['popup'];
+        this.tempContainer.style.width = this.settings.width;
+        this.tempContainer.style.height = this.settings.height;
         this.tempContainer.innerHTML = `
-            Hello
+            <div class="${popupStyle['popup-title']}">
+                <h3>${this.settings.title}</h3>
+                <i class="iconfont icon-guanbi"></i>
+            </div>
+            <div class="${popupStyle['popup-content']}">
+            
+            </div>
         `;
         document.body.appendChild(this.tempContainer);
+
+        // 遮罩
+        if (this.settings.mask) {
+
+        }
     };
 
     // 事件

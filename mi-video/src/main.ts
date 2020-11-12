@@ -8,11 +8,11 @@ listItem.forEach(item => {
     item.addEventListener('click', function() {
         const videoSrc = this.dataset.src;
         const videoTitle = this.dataset.title;
-        console.log('videoSrc', videoSrc)
-        console.log('videoTitle', videoTitle)
         
         popup({
-            title: '提示'
+            title: '提示',
+            width: '500px',
+            height: '300px',
         })
     })
 })

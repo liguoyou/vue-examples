@@ -33,7 +33,7 @@ module.exports = {
                     options: {
                         // modules: true,
                         modules: {
-                            localIdentHashPrefix: 'my-custom-hash'
+                            localIdentName: 'g-[local]--[hash:base64:5]'
                         },
                     },
                 }],
