@@ -3,7 +3,6 @@ interface Ipopup {
     title: string;
     width?: string;
     height?: string;
-    pos?: string;
     mask?: boolean;
     content?: () => void;
 }
@@ -21,11 +20,11 @@ function popup(options: Ipopup) {
 
 class Popup implements Icomponent {
     tempContainer;
+    maskElement;
     constructor(private settings: Ipopup) {
         this.settings = Object.assign({
             width: '880px',
             height: '556px',
-            pos: 'center',
             mask: true,
             content: () => {}
         }, this.settings);
@@ -34,7 +33,10 @@ class Popup implements Icomponent {
 
     // 初始化
     init() {
+        // 创建弹框
         this.template();
+        // 遮罩
+        this.settings.mask && this.createMask();
     };
 
     // 创建模板
@@ -53,15 +55,17 @@ class Popup implements Icomponent {
             </div>
         `;
         document.body.appendChild(this.tempContainer);
-
-        // 遮罩
-        if (this.settings.mask) {
-
-        }
     };
 
     // 事件
     handle() {};
+
+    // 创建遮罩层
+    createMask() {
+        this.maskElement = document.createElement('div');
+        this.maskElement.className = popupStyle['popup-mask'];
+        document.body.appendChild(this.maskElement);
+    };
 }
 
 export default popup;
