@@ -1,3 +1,4 @@
+// element-ui 组件注册
 import Vue from 'vue';
 import { Button, Select, Message } from 'element-ui';
 

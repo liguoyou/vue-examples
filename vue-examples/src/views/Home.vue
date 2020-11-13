@@ -1,17 +1,29 @@
 <template>
   <div class="home">
     <h1>Vue, Element, Router, Vuex</h1>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <h3>Installed CLI Plugins</h3>
+    <div class="logos">
+      <img alt="Vue logo" src="../assets/logo.png" width="100px">
+      <svg-icon id="element" class="svg-icon-element" />
+      <svg-icon id="dingding" class="svg-icon-dingding" />
+      <svg-icon id="alipay" class="svg-icon-alipay" />
+      <svg-icon id="github" class="svg-icon-github" />
+      <svg-icon id="taobao" class="svg-icon-taobao" />
+    </div>
+    <h3>文档导航</h3>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
       <li>
         <el-button type="primary">
-          主要按钮
+          vue-examples
+        </el-button>
+      </li>
+      <li>
+        <el-button type="primary">
+          mi-video
+        </el-button>
+      </li>
+      <li>
+        <el-button type="primary">
+          webpack-examples
         </el-button>
       </li>
     </ul>
@@ -19,31 +31,33 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
-
 export default {
   name: 'Home',
-  components: {
-    // HelloWorld,
-  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+.home {
+  .logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h3 {
+    margin: 40px 0 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #42b983;
+  }
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
