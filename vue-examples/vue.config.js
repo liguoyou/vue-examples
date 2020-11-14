@@ -14,17 +14,17 @@ module.exports = {
 
   // webpack-chain
   chainWebpack(config) {
-    // 配置 svg 规则排除 icons 目录
+    // 配置 svg 规则排除 svgs 目录
     config.module
       .rule('svg')
-      .exclude.add(path.join(__dirname, 'src/components/SvgIcon/icons'))
+      .exclude.add(path.join(__dirname, 'src/assets/svgs'))
       .end();
 
-    // 新增 icons 规则，设置 svg-sprite-loader 处理 icons 目录中的 .svg 文件
+    // 新增 icons 规则，设置 svg-sprite-loader 处理 svgs 目录中的 .svg 文件
     config.module
       .rule('icons')
       .test(/\.svg$/)
-      .include.add(path.join(__dirname, 'src/components/SvgIcon/icons'))
+      .include.add(path.join(__dirname, 'src/assets/svgs'))
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
