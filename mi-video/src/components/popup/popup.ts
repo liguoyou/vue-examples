@@ -4,7 +4,7 @@ interface Ipopup {
     width?: string;
     height?: string;
     mask?: boolean;
-    content?: (content: HTMLElement) => void;
+    content?: (content: Element) => void;
 }
 
 interface Icomponent {
@@ -19,8 +19,8 @@ function popup(options: Ipopup) {
 }
 
 class Popup implements Icomponent {
-    tempContainer;
-    maskElement;
+    tempContainer: HTMLElement;
+    maskElement: HTMLElement;
     constructor(private settings: Ipopup) {
         this.settings = Object.assign({
             width: '880px',

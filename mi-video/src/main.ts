@@ -1,6 +1,7 @@
-import './main.css'
-import './assets/iconfont/iconfont.css'
-import popup from './components/popup/popup'
+import './main.css';
+import './assets/iconfont/iconfont.css';
+import popup from './components/popup/popup';
+import video from './components/video/video';
 
 const listItem = document.querySelectorAll('#videoList li');
 
@@ -10,12 +11,15 @@ listItem.forEach(item => {
         const videoTitle = this.dataset.title;
         
         popup({
-            title: '提示',
+            title: videoTitle,
             width: '500px',
             height: '300px',
             content: (content)=> {
-                console.log('content', content);
+                video({
+                    src: videoSrc,
+                    elem: content,
+                });
             },
-        })
-    })
-})
+        });
+    });
+});

@@ -1,0 +1,47 @@
+.video-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.video {
+    width: 100%;
+    height: 100%;
+    /* 视频缩放 */
+    object-fit: cover;
+}
+.video-controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    transform: translateY(50px);
+    background: rgba(0,0,0,.6);
+    opacity: 0;
+    overflow: hidden;
+}
+.video-container:hover .video-controls {
+    transform: translateY(0);
+    opacity: 1;
+}
+.video-progress {
+
+}
+.video-progress .video-progress-now {}
+.video-progress .video-progress-suc {}
+.video-progress .video-progress-bar {}
+.video-play {}
+.video-play i {}
+.video-time {}
+.video-time span {}
+.video-volume {}
+.video-volume i {}
+.volume-progress {}
+.volume-progress .volume-progress-now{}
+.volume-progress .volume-progress-suc{}
+.volume-progress .volume-progress-bar{}
+.video-full {}
+.video-full i {}
