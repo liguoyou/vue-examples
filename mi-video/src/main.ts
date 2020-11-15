@@ -13,6 +13,9 @@ listItem.forEach(item => {
             title: '提示',
             width: '500px',
             height: '300px',
+            content: (content)=> {
+                console.log('content', content);
+            },
         })
     })
 })

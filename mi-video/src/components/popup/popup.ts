@@ -4,7 +4,7 @@ interface Ipopup {
     width?: string;
     height?: string;
     mask?: boolean;
-    content?: () => void;
+    content?: (content: HTMLElement) => void;
 }
 
 interface Icomponent {
@@ -37,6 +37,10 @@ class Popup implements Icomponent {
         this.template();
         // 遮罩
         this.settings.mask && this.createMask();
+        // 初始化事件
+        this.handle();
+        // 回调
+        this.contentCallback();
     };
 
     // 创建模板
@@ -48,9 +52,9 @@ class Popup implements Icomponent {
         this.tempContainer.innerHTML = `
             <div class="${popupStyle['popup-title']}">
                 <h3>${this.settings.title}</h3>
-                <i class="iconfont icon-guanbi"></i>
+                <i id="close" class="iconfont icon-guanbi"></i>
             </div>
-            <div class="${popupStyle['popup-content']}">
+            <div id="popupContent" class="${popupStyle['popup-content']}">
             
             </div>
         `;
@@ -58,13 +62,25 @@ class Popup implements Icomponent {
     };
 
     // 事件
-    handle() {};
+    handle() {
+        const popupClose = this.tempContainer.querySelector('#close');
+        popupClose.addEventListener('click', ()=> {
+            document.body.removeChild(this.tempContainer);
+            this.maskElement && document.body.removeChild(this.maskElement);
+        })
+    };
 
     // 创建遮罩层
     createMask() {
         this.maskElement = document.createElement('div');
         this.maskElement.className = popupStyle['popup-mask'];
         document.body.appendChild(this.maskElement);
+    };
+
+    // 回调
+    contentCallback() {
+        const popupContent = this.tempContainer.querySelector('#popupContent');
+        this.settings.content(popupContent);
     };
 }
 
