@@ -12,11 +12,16 @@ const routes = [
   },
   {
     path: '/svg',
-    name: 'Svg',
+    name: 'SvgPage',
     // 路由级代码拆分
     // 这将为此路由生成一个单独的块（about.[hash].js）
     // 当访问路由时延迟加载
     component: () => import(/* webpackChunkName: "svg" */ '../views/svg/Index.vue'),
+  },
+  {
+    path: '/validator',
+    name: 'Validator',
+    component: () => import(/* webpackChunkName: "validator" */ '../views/form/Validator.vue'),
   },
 ];
 

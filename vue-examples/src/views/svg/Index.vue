@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'Svg',
+  name: 'SvgPage',
 };
 </script>
 
