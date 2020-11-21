@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <h3>相关标签</h3>
+    <!-- <h2>相关标签</h2>
     <div class="tags">
       <el-tag
-        v-for="item in labels"
-        :key="item.label"
+        v-for="(item, index) in labels"
+        :key="'label' + index"
         :type="item.type"
         effect="dark"
       >
@@ -19,17 +19,12 @@
 
     <h3>文档导航</h3>
     <ul>
-      <li>
-        <router-link to="/">
-          Home
-        </router-link>
+      <li v-for="(nav, index) of navs" :key="'nav' + index">
+        <el-link :type="nav.type" @click="toRoute(nav.path)">
+          {{ nav.text }}
+        </el-link>
       </li>
-      <li>
-        <router-link type="primary" to="/svg">
-          svg
-        </router-link>
-      </li>
-    </ul>
+    </ul> -->
 
     <router-view/>
   </div>
@@ -40,10 +35,11 @@ export default {
   name: 'App',
   data() {
     return {
+      // 标签 default info warning success danger
       labels: [
         {
           label: 'Vue',
-          type: 'info',
+          type: 'default',
         },
         {
           label: 'Router',
@@ -58,12 +54,42 @@ export default {
           type: 'danger',
         },
       ],
+      // 导航 default primary success info warning danger
+      navs: [
+        {
+          text: '首页',
+          path: '/',
+          type: 'default',
+        },
+        {
+          text: 'Svg',
+          path: '/svg',
+          type: 'success',
+        },
+        {
+          text: 'Validator',
+          path: '/validator',
+          type: 'info',
+        },
+      ],
     };
+  },
+
+  methods: {
+    // 跳转路由
+    toRoute(path) {
+      if (path === this.$route.path) return;
+      this.$router.push(path);
+    },
   },
 };
 </script>
 
 <style lang="scss">
+html,body {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -94,9 +120,6 @@ export default {
   li {
     display: inline-block;
     margin: 0 10px;
-  }
-  a {
-    color: #42b983;
   }
 }
 </style>
