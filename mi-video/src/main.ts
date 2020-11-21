@@ -12,8 +12,8 @@ listItem.forEach(item => {
         
         popup({
             title: videoTitle,
-            width: '500px',
-            height: '300px',
+            width: '880px',
+            height: '556px',
             content: (content)=> {
                 video({
                     src: videoSrc,
