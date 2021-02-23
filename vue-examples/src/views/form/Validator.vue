@@ -1,16 +1,33 @@
 <template>
   <div class="container">
-    <el-form>
+    <el-form
+      ref="form"
+      :model="formData"
+      :rules="formRules"
+    >
       <el-form-item
-        ref="form"
-        :model="formData"
-        :rules="formRules"
-        label="价格校验:"
+        label="价格:"
         prop="price"
       >
         <el-input
           v-model="formData.price"
-          placeholder="只能输入数字、小数点, 并且最大值不能超过99999.99的数值; 最多能输入两位小数"
+          type="text"
+          placeholder="只能输入数字、小数点的正数; 最多能输入两位小数"
+          @input="handlePriceInput"
+        />
+      </el-form-item>
+      <el-form-item
+        ref="form"
+        :model="formData"
+        :rules="formRules"
+        label="正整数:"
+        prop="price"
+      >
+        <el-input
+          v-model="formData.nums"
+          type="text"
+          placeholder="只能输入正整数"
+          @input="(value) => formData.nums = $tools.numberFilter(value)"
         />
       </el-form-item>
       <el-form-item label="">
@@ -29,11 +46,18 @@ export default {
     return {
       formData: {
         price: '',
+        nums: '',
       },
       formRules: {
         price: [],
       },
     };
+  },
+  methods: {
+    // 价格变化
+    handlePriceInput(value) {
+      this.formData.price = this.$tools.priceFilter(value);
+    },
   },
 };
 </script>

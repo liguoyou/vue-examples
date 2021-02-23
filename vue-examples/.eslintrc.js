@@ -25,6 +25,7 @@ module.exports = {
       }
     }],
     "vue/html-closing-bracket-spacing": "off",
+    'no-param-reassign': ['error', { props: false }], // 允许修改函数的参数属性
   },
   // 全局变量
   globals: {},
