@@ -1,9 +1,10 @@
 <template>
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
-		<view>
+		<view class="title-box">
 			<text class="title">{{title}}</text>
 		</view>
+		<u-button type="primary">主要按钮</u-button>
 	</view>
 </template>
 
@@ -15,7 +16,7 @@
 			}
 		},
 		onLoad() {
-
+			console.log('this.$u.config.v', this.$u.config.v)
 		},
 		methods: {
 
@@ -23,7 +24,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -42,8 +43,11 @@
 		justify-content: center;
 	}
 
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+	.title-box {
+		overflow: hidden;
+		.title {
+			font-size: 36rpx;
+			color: #8f8f94;
+		}
 	}
 </style>
