@@ -1,17 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "vue-examples"
-		},
-		{
-			"path": "mi-video"
-		},
-		{
-			"path": "webpack-examples"
-		},
-		{
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
 }
