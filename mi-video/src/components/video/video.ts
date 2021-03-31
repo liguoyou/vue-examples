@@ -5,7 +5,6 @@ interface Ivideo {
     elem: Element;
     autoplay?: boolean;
 }
-
 interface Icomponent {
     tempContainer: HTMLElement;
     init: () => void;
@@ -59,7 +58,37 @@ class Video implements Icomponent {
         this.settings.elem.appendChild(this.tempContainer);
     };
     handle () {
-        
+        const videoContent: HTMLVideoElement = document.querySelector(`.${videoStyle['video']}`);
+        const videoPlay: HTMLElement = document.querySelector(`.${videoStyle['video-play']} i.iconfont`);
+        const videoTime: HTMLElement = document.querySelector(`.${videoStyle['video-time']} span`);
+        // 视频是否加载完毕
+        videoContent.addEventListener('canplay', (e) => {
+            console.log(`视频是否加载完毕`, e);
+        });
+        // 视频播放事件
+        videoContent.addEventListener('play', () => {
+            videoPlay.className = 'iconfont icon-zantingtingzhi';
+            console.log(`videoContent.duration`, videoContent.duration)
+            videoTime.innerHTML = toTimeString(videoContent.duration)
+        });
+        // 视频暂停事件
+        videoContent.addEventListener('pause', (e) => {
+            videoPlay.className = 'iconfont icon-bofang';
+        });
+        // 点击播放/暂停
+        videoPlay.addEventListener('click', () =>{
+            if (videoContent.paused) {
+                videoContent.play();
+            } else {
+                videoContent.pause();
+            }
+        });
+        // 秒 to 时:分:秒
+        const toTimeString = (seconds: number) : string => {
+            if (!seconds) return '00:00'
+            seconds = Math.round(seconds)
+            return `${Math.floor(seconds/60)}:00`;
+        };
     };
 }
 

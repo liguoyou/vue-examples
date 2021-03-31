@@ -9,7 +9,6 @@ listItem.forEach(item => {
     item.addEventListener('click', function() {
         const videoSrc = this.dataset.src;
         const videoTitle = this.dataset.title;
-        
         popup({
             title: videoTitle,
             width: '880px',
