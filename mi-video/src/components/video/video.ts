@@ -60,34 +60,61 @@ class Video implements Icomponent {
     handle () {
         const videoContent: HTMLVideoElement = document.querySelector(`.${videoStyle['video']}`);
         const videoPlay: HTMLElement = document.querySelector(`.${videoStyle['video-play']} i.iconfont`);
-        const videoTime: HTMLElement = document.querySelector(`.${videoStyle['video-time']} span`);
+        const videoTime: NodeListOf<Element> = document.querySelectorAll(`.${videoStyle['video-time']} span`);
+        const videoFull: HTMLElement = document.querySelector(`.${videoStyle['video-full']}`);
+        const videoProgressSuc: HTMLElement = document.querySelector(`.${videoStyle['video-progress-suc']}`);
+        const videoProgressNow: HTMLElement = document.querySelector(`.${videoStyle['video-progress-now']}`);
+        const videoProgressBar: HTMLElement = document.querySelector(`.${videoStyle['video-progress-bar']}`);
+        let timer = null;
         // 视频是否加载完毕
-        videoContent.addEventListener('canplay', (e) => {
-            console.log(`视频是否加载完毕`, e);
+        videoContent.addEventListener('canplay', (): void => {
+            videoTime[1].innerHTML = toTimeString(videoContent.duration);
         });
         // 视频播放事件
-        videoContent.addEventListener('play', () => {
+        videoContent.addEventListener('play', (): void => {
             videoPlay.className = 'iconfont icon-zantingtingzhi';
-            console.log(`videoContent.duration`, videoContent.duration)
-            videoTime.innerHTML = toTimeString(videoContent.duration)
+            timer = setInterval(() => {
+                playing(videoContent.currentTime);
+            }, 1000);
         });
         // 视频暂停事件
-        videoContent.addEventListener('pause', (e) => {
+        videoContent.addEventListener('pause', (): void => {
             videoPlay.className = 'iconfont icon-bofang';
+            if (timer) clearInterval(timer);
         });
         // 点击播放/暂停
-        videoPlay.addEventListener('click', () =>{
+        videoPlay.addEventListener('click', (): void => {
             if (videoContent.paused) {
                 videoContent.play();
             } else {
                 videoContent.pause();
             }
         });
-        // 秒 to 时:分:秒
-        const toTimeString = (seconds: number) : string => {
-            if (!seconds) return '00:00'
-            seconds = Math.round(seconds)
-            return `${Math.floor(seconds/60)}:00`;
+        // 点击全屏
+        videoFull.addEventListener('click', (): void => {
+            videoContent.requestFullscreen();
+        });
+        // 视频播放中
+        const playing = (seconds: number): void => {
+            videoTime[0].innerHTML = toTimeString(seconds)
+            const nowScale = videoContent.currentTime / videoContent.duration;
+            const sucScale = videoContent.buffered.end(0) / videoContent.duration;
+            videoProgressNow.style.width = nowScale * 100 + '%';
+            videoProgressSuc.style.width = sucScale * 100 + '%';
+            videoProgressBar.style.left = nowScale * 100 + '%';
+        };
+        // 秒 to 分:秒
+        const toTimeString = (seconds: number): string => {
+            if (!seconds) return '00:00';
+            const secondsTotal: number = Math.round(seconds);
+            const minutes: number = Math.floor(secondsTotal/60);
+            const second: number = secondsTotal % 60;
+            return `${prevZero(minutes)}:${prevZero(second)}`;
+        };
+        // 前置0
+        const prevZero = (num: number): string => {
+            if (num > 9) return `${num}`;
+            return `0${num}`;
         };
     };
 }
